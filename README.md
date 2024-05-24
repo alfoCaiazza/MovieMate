@@ -67,4 +67,20 @@ Per questo progetto, MongoDB è una scelta eccellente per la sua flessibilità n
 3. Raccomandazioni Personalizzate (opzionale): Algoritmo di raccomandazione che suggerisce film basati sulle preferenze degli utenti e sulle interazioni passate.
 
 ## Implementazione
+1. Setup del Database:
+    - Creazione delle collezioni "Users", "Movies", e "Interactions" in MongoDB.
+    - Definizione degli indici per ottimizzare le query (es. indicizzare per user_id e movie_id).
+2. Algoritmo di Raccomandazione:
+    - Utilizzo di tecniche di collaborative filtering e content-based filtering per generare suggerimenti di film.
+3. API di Accesso:
+    - Implementazione di un'API REST per l'accesso ai dati e per le operazioni CRUD
+4. Interfaccia Utente:
+    - Sviluppo di una semplice interfaccia web per la visualizzazione dei film e delle raccomandazioni.
 
+## Dataset
+Per il progetto di un sistema di raccomandazione di film con un database NoSQL, è essenziale avere accesso a dataset di qualità. Alcune opzioni di dataset pubblicamente disponibili possono essere:
+1.  MovieLens
+2.  IMDb Datasets
+
+## Conclusione
+Questo progetto non solo offre una grande opportunità di apprendere le basi dei database NoSQL, ma anche di implementare funzionalità pratiche che possono essere utili in un contesto reale. Inoltre, l'uso di MongoDB consente di sfruttare la flessibilità e la scalabilità necessarie per gestire un volume di dati in crescita.
