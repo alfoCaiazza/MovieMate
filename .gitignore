@@ -1,0 +1,7 @@
+# .gitignore nella root della repository
+
+# Environment variables
+.env
+
+# DataFrame
+*.csv
