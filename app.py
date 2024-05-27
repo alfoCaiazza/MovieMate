@@ -5,6 +5,8 @@ from pymongo import MongoClient
 import os
 from backend.default_routes import setup_routes
 from backend.add_movie import insert_movie
+from backend.get_featured import get_featured
+from backend.get_last_featured import get_last_featured
 
 app = Flask(__name__)
 CORS(app)
@@ -24,6 +26,8 @@ except Exception as e:
 
 setup_routes(app)
 insert_movie(app, db)
+get_featured(app, db)
+get_last_featured(app, db)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
