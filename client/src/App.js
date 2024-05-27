@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './components/Homepage';
+import InsertMovie from './components/InsertMovie';
 
-function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/data')
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the data!", error);
-      });
-  }, []);
-
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Flask React App</h1>
-        {data ? <p>{data.message}</p> : <p>Loading...</p>}
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/api/insert_movie" element={<InsertMovie />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
