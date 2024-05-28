@@ -31,22 +31,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <header className="header">
-        <nav className="navbar">
-          <div className="logo">MovieMate</div>
-          <ul className="nav-links">
-            <li>Movies</li>
-            <li>TV Shows</li>
-            <li>Watch</li>
-            <li>Community</li>
-          </ul>
-          <div className="auth-links">
-            <button className="sign-in">Sign In</button>
-            <button className="sign-up">Sign Up</button>
-          </div>
-        </nav>
-      </header>
-
       <main className="main-content">
         <section className="hero">
           <div className="hero-text">
@@ -81,10 +65,6 @@ const HomePage = () => {
           </div>
         </section>
       </main>
-
-      <footer className="footer">
-        <p>&copy; 2024 MovieMate. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

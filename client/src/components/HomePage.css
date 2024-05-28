@@ -10,54 +10,6 @@ body {
     min-height: 100vh;
   }
   
-  .header {
-    background-color: #333;
-    padding: 10px 20px;
-    color: white;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .nav-links li {
-    cursor: pointer;
-  }
-  
-  .auth-links {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .sign-in, .sign-up {
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .sign-in {
-    background-color: #555;
-    color: white;
-  }
-  
-  .sign-up {
-    background-color: #0fe9f1;
-    color: black;
-  }
-  
   .main-content {
     flex: 1;
     padding: 20px;
@@ -96,10 +48,5 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  .footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-  }
+
   

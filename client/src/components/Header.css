@@ -1,0 +1,47 @@
+.header {
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links li {
+    cursor: pointer;
+  }
+  
+  .auth-links {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .sign-in, .sign-up {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sign-in {
+    background-color: #555;
+    color: white;
+  }
+  
+  .sign-up {
+    background-color: #0fe9f1;
+    color: black;
+  }
