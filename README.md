@@ -13,13 +13,13 @@ L'obiettivo è creare un sistema di raccomandazione di film basato sulle prefere
             "name": "string",
             "email": "string",
             "age": "number",
-            "preferences": ["string"],  // generi preferiti, es: ["azione", "comedia"]
+            "preferences": ["string"],
             "watchlist": ["string"],  // ID dei film nella watchlist
             "watched": ["string"],  // ID dei film già visti
             "ratings": [  // Lista delle valutazioni date ai film
                 {
                 "movie_id": "string",
-                "rating": "number",  // 1-5 stelle
+                "rating": "number",
                 "review": "string"
                 }
             ]
@@ -29,15 +29,16 @@ L'obiettivo è creare un sistema di raccomandazione di film basato sulle prefere
     ```bash
         {
             "movie_id": "string",
+            "poster" : "string",
             "title": "string",
-            "genre": ["string"],  // generi del film
+            "genre": "string",
+            "overview" : "string",
             "director": "string",
-            "cast": ["string"],  // attori principali
+            "cast": ["string"],
             "release_year": "number",
-            "ratings": {  // Statistiche delle valutazioni
-                "average_rating": "number",
-                "total_ratings": "number"
-            },
+            "rating" : "number",
+            "meta_score" : "number",
+            "gross" : "number",
             "reviews": [  // Lista delle recensioni
                 {
                 "user_id": "string",
@@ -47,16 +48,6 @@ L'obiettivo è creare un sistema di raccomandazione di film basato sulle prefere
             ]
         }
 
-
-3. Interazione (interaction):
-    ```bash
-        {
-            "interaction_id": "string",
-            "user_id": "string",
-            "movie_id": "string",
-            "timestamp": "string",  // data e ora dell interazione
-            "action": "string" // tipo di interazione, es: "watched", "rated", "added to watchlist"
-        }
 
 ## Scelta del database
 Per questo progetto, MongoDB è una scelta eccellente per la sua flessibilità nella gestione dei dati documentali e la facilità di scalabilità.
