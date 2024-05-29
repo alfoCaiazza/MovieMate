@@ -62,64 +62,68 @@ const SignUp = () => {
         {error && <p className="error">{error}</p>}
         {message && <p className="message">{message}</p>}
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="age">Age:</label>
-            <input 
-              type="number" 
-              id="age" 
-              name="age" 
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label>Favorite Genres:</label>
-            {genreOptions.map((genre) => (
-              <div key={genre}>
-                <input 
-                  type="checkbox" 
-                  id={genre} 
-                  value={genre}
-                  checked={genres.includes(genre)}
-                  onChange={handleGenreChange}
-                />
-                <label htmlFor={genre}>{genre}</label>
+          <div className="form-horizontal">
+            <div className="form-group">
+              <label htmlFor="name">Name:</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="age">Age:</label>
+              <input 
+                type="number" 
+                id="age" 
+                name="age" 
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                required 
+              />
+            </div>
+            <div className="form-group">
+              <label>Favorite Genres:</label>
+              <div className="genres-container">
+                {genreOptions.map((genre) => (
+                  <div key={genre} className="genre-option">
+                    <input 
+                      type="checkbox" 
+                      id={genre} 
+                      value={genre}
+                      checked={genres.includes(genre)}
+                      onChange={handleGenreChange}
+                    />
+                    <label htmlFor={genre}>{genre}</label>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
           <button type="submit">Sign Up</button>
         </form>

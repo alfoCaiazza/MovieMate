@@ -26,7 +26,6 @@ const Header = () => {
         <ul className="nav-links">
           <li>Movies</li>
           <li>TV Shows</li>
-          <li>Watch</li>
           <li>Community</li>
         </ul>
         <div className="auth-links">

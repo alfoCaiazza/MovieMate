@@ -20,7 +20,8 @@ const SignIn = () => {
 
       if (response.ok) {
         setError('');
-        navigate('/');
+        navigate('/homepage');
+        window.location.reload();
       } else {
         setError(data.error);
       }
