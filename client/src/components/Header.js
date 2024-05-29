@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/api/get_current_user')
@@ -15,7 +16,13 @@ const Header = () => {
   const handleLogout = async () => {
     await fetch('/api/user_logout', { method: 'POST' });
     setUser(null);
+    navigate('/');
+    window.location.reload(); 
   };
+
+  const handleProfileClick = async => {
+    navigate('/api/profile');
+  }
 
   return (
     <header className="header">
@@ -31,9 +38,9 @@ const Header = () => {
         <div className="auth-links">
           {user ? (
             <>
-              <span className="profile-icon">
+              <button className="profile-icon" onClick={handleProfileClick}>
                 <i className="bi bi-person"></i>  {/* Icona utente di Bootstrap */}
-              </span>
+              </button>
               <button onClick={handleLogout}>Logout</button>
             </>
           ) : (
