@@ -44,6 +44,23 @@ const HomePage = () => {
           <div className="featured-content">
             {featuredItems.map(item => (
               <div key={item._id} className="featured-item">
+                <div className="featured-image-wrapper">
+                  <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
+                </div>
+                <div className="featured-details">
+                  <h3 className="featured-title">{item.Series_Title}</h3>
+                  <p className="featured-overview">{item.Overview}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="trailers">
+          <h2>Latest Trailers</h2>
+          <div className="trailers-content">
+            {trailerItems.map(item => (
+              <div key={item._id} className="trailer-item">
                 <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
                 <h3>{item.Series_Title}</h3>
                 <p>{item.Overview}</p>
@@ -53,7 +70,7 @@ const HomePage = () => {
         </section>
 
         <section className="trailers">
-          <h2>Latest Trailers</h2>
+          <h2>Selected For You</h2>
           <div className="trailers-content">
             {trailerItems.map(item => (
               <div key={item._id} className="trailer-item">

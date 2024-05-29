@@ -31,7 +31,9 @@ const Header = () => {
         <div className="auth-links">
           {user ? (
             <>
-              <span className="profile-icon">{user.name}</span>
+              <span className="profile-icon">
+                <i className="bi bi-person"></i>  {/* Icona utente di Bootstrap */}
+              </span>
               <button onClick={handleLogout}>Logout</button>
             </>
           ) : (

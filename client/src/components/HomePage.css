@@ -31,22 +31,70 @@ body {
     font-size: 24px;
   }
   
-  .featured, .trailers {
-    margin: 20px 0;
-  }
-  
-  .featured-content, .trailers-content {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .featured-item, .trailer-item {
-    flex: 1;
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
+/* Stili generali per la sezione featured */
+.featured, .trailers {
+  margin: 20px 0;
+}
 
-  
+/* Layout per contenuti featured e trailers */
+.featured-content, .trailers-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  /* Dimensione minima moderata per gli elementi */
+  gap: 20px;
+}
+
+/* Stili per elementi featured e trailer */
+.featured-item, .trailer-item {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.featured-item:hover, .trailer-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Wrapper per l'immagine featured */
+.featured-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 15px;
+}
+
+/* Immagine featured */
+.featured-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.featured-image-wrapper:hover .featured-image {
+  transform: scale(1.05);
+}
+
+/* Stili per i dettagli featured */
+.featured-details {
+  text-align: left;
+}
+
+/* Titolo featured */
+.featured-title {
+  font-size: 1.25rem;
+  margin: 0;
+  color: #333;
+}
+
+/* Overview featured */
+.featured-overview {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 10px;
+}
+
