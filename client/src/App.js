@@ -6,6 +6,7 @@ import HomePage from './components/Homepage';
 import InsertMovie from './components/InsertMovie';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import AdminDashboard from './components/AdminDashboard';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/api/insert_movie" element={<InsertMovie />} />
           <Route path="/api/user_login" element={<SignIn />} />
           <Route path="/api/user_signup" element={<SignUp />} />
+          <Route path="/api/admin_dashboard" element={<AdminDashboard />} />
         </Routes>
       <Footer />
     </Router>

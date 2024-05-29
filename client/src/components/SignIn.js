@@ -20,7 +20,12 @@ const SignIn = () => {
 
       if (response.ok) {
         setError('');
-        navigate('/');
+         // Check if the email and password match the specific criteria
+         if (email === 'admin@moviemate.com' && password === 'admin') {
+          navigate('/api/admin_dashboard');
+        } else {
+          navigate('/');
+        }
         window.location.reload();
       } else {
         setError(data.error);

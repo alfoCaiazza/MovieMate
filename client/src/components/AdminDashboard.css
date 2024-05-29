@@ -1,0 +1,94 @@
+/* Stili generali */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+  }
+  
+  .homepage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .hero {
+    background-color: #272c34;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .hero-text h1 {
+    margin: 0;
+    font-size: 48px;
+  }
+  
+  .hero-text p {
+    font-size: 24px;
+  }
+  
+  /* Stili per la dashboard */
+  .admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;  /* Centra orizzontalmente */
+    justify-content: center;  /* Centra verticalmente */
+  }
+  
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;  /* Imposta una larghezza massima per il contenuto della griglia */
+  }
+  
+  .dashboard-item {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    align-items: center;  /* Centra il contenuto all'interno di ciascun item */
+  }
+  
+  .dashboard-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dashboard-item h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .dashboard-item p {
+    flex: 1;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+    text-align: center;  /* Centra il testo */
+  }
+  
+  .dashboard-item button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #272c34;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .dashboard-item button:hover {
+    background-color: #1f2229;
+  }
+  
