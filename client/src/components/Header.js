@@ -31,9 +31,7 @@ const Header = () => {
           <Link to="/" className="sign-in">MovieMate</Link>
         </div>
         <ul className="nav-links">
-          <li>Movies</li>
-          <li>TV Shows</li>
-          <li>Community</li>
+          <li>Explore</li>
         </ul>
         <div className="auth-links">
           {user ? (

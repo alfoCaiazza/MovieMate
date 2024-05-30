@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import json
 
 def insert_movie(app, db):
-    @app.route('/api/insert_movie', methods=['GET'])
+    @app.route('/api/add_movie', methods=['GET'])
     def inner_insert_movie():
         try:
             movie_json = request.args.get('movie')

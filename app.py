@@ -13,6 +13,8 @@ from backend.user_login import user_login
 from backend.user_signup import user_signup
 from backend.get_current_user import get_current_user
 from backend.user_logout import user_logout
+from backend.get_movies import get_movies
+from backend.get_users import get_users
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
@@ -40,11 +42,8 @@ get_last_featured(app, db)
 user_login(app, db)
 user_signup(app, db)
 user_logout(app)
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    data = {"message": "We reached the top!"}
-    return jsonify(data)
+get_movies(app, db)
+get_users(app, db)
 
 if __name__ == '__main__':
     app.run(debug=True)

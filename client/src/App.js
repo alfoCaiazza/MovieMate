@@ -8,6 +8,9 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import AdminDashboard from './components/AdminDashboard';
 import Profile from './components/Profile';
+import AddMovie from './components/AddMovie';
+import GetMovies from './components/GetMovies';
+import GetUsers from './components/GetUsers';
 
 const App = () => {
   return (
@@ -20,6 +23,9 @@ const App = () => {
           <Route path="/api/user_signup" element={<SignUp />} />
           <Route path="/api/admin_dashboard" element={<AdminDashboard />} />
           <Route path="/api/profile" element={<Profile />} />
+          <Route path="/api/add_movie" element={<AddMovie />} />
+          <Route path="/api/get_movies" element={<GetMovies />} />
+          <Route path="/api/get_users" element={<GetUsers />} />
         </Routes>
       <Footer />
     </Router>
