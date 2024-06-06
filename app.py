@@ -15,6 +15,8 @@ from backend.get_current_user import get_current_user
 from backend.user_logout import user_logout
 from backend.get_movies import get_movies
 from backend.get_users import get_users
+from backend.search import search
+from backend.handle_movie import add_rating, add_to_favorites, handle_movie
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
@@ -44,6 +46,10 @@ user_signup(app, db)
 user_logout(app)
 get_movies(app, db)
 get_users(app, db)
+search(app, db)
+handle_movie(app, db)
+add_to_favorites(app, db)
+add_rating(app, db)
 
 if __name__ == '__main__':
     app.run(debug=True)

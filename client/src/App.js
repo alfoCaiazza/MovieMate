@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,8 +11,19 @@ import Profile from './components/Profile';
 import AddMovie from './components/AddMovie';
 import GetMovies from './components/GetMovies';
 import GetUsers from './components/GetUsers';
+import SearchResult from './components/SearchResult';
+import MovieDetail from './components/MovieDetail';
 
 const App = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/get_current_user')
+      .then(response => response.json())
+      .then(data => setUser(data.user))
+      .catch(() => setUser(null));
+  }, []);
+
   return (
     <Router>
       <Header />
@@ -26,6 +37,8 @@ const App = () => {
           <Route path="/api/add_movie" element={<AddMovie />} />
           <Route path="/api/get_movies" element={<GetMovies />} />
           <Route path="/api/get_users" element={<GetUsers />} />
+          <Route path="/api/search" element={ <SearchResult />} />
+          <Route path= "/api/handle_movie/:id" element={ <MovieDetail user={user}/>} />
         </Routes>
       <Footer />
     </Router>

@@ -1,5 +1,3 @@
-/* Header.css */
-
 .header {
   background-color: #333;
   padding: 10px 20px;
@@ -40,16 +38,49 @@
 }
 
 .sign-in {
-  background-color: #555;
+  background-color: #55555500;
   color: white;
+  text-decoration: none;
 }
 
 .sign-up {
   background-color: #0fe9f1;
-  color: black;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
 }
 
 .profile-icon {
   font-size: 1.5rem; /* Dimensione dell'icona */
   margin-right: 10px;
+  border-radius: 20%;
+  background-color: #0fe9f1;
+}
+
+/* Stile per la barra di ricerca */
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px; /* Limite massimo della larghezza */
+}
+
+.search-form input {
+  flex-grow: 1;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-form button {
+  max-width: 10%;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0fe9f1;
+  color: black;
+  cursor: pointer;
+  margin-left: 3%;
 }

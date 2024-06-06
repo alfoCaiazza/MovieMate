@@ -2,27 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
-  const [user, setUser] = useState(null);
+const Header = ({ user }) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch('/api/get_current_user')
-      .then(response => response.json())
-      .then(data => setUser(data.user))
-      .catch(() => setUser(null));
-  }, []);
 
   const handleLogout = async () => {
     await fetch('/api/user_logout', { method: 'POST' });
-    setUser(null);
     navigate('/');
-    window.location.reload(); 
+    window.location.reload();
   };
 
-  const handleProfileClick = async => {
+  const handleProfileClick = () => {
     navigate('/api/profile');
-  }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/api/search?query=${searchQuery}`);
+  };
 
   return (
     <header className="header">
@@ -30,14 +27,20 @@ const Header = () => {
         <div className="logo">
           <Link to="/" className="sign-in">MovieMate</Link>
         </div>
-        <ul className="nav-links">
-          <li>Explore</li>
-        </ul>
+        <form className="search-form" onSubmit={handleSearch}>
+          <input 
+            type="text" 
+            value={searchQuery} 
+            onChange={(e) => setSearchQuery(e.target.value)} 
+            placeholder="Search Movie by Title" 
+          />
+          <button type="submit"><i className="bi bi-search"></i></button>
+        </form>
         <div className="auth-links">
           {user ? (
             <>
               <button className="profile-icon" onClick={handleProfileClick}>
-                <i className="bi bi-person"></i>  {/* Icona utente di Bootstrap */}
+                <i className="bi bi-person"></i>
               </button>
               <button onClick={handleLogout}>Logout</button>
             </>

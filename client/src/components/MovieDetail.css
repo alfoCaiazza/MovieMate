@@ -1,0 +1,75 @@
+.movie-detail {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.179);
+    margin: 20px;
+  }
+  
+  .movie-poster {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .movie-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px;
+  }
+  
+  .movie-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .movie-overview {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  .user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .favorites-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px;
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 30%;
+  }
+  
+  .favorites-button:hover {
+    background-color: #e63946;
+  }
+  
+  .rating-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .rating-input {
+    padding: 5px;
+    width: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
