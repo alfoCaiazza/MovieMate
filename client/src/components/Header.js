@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ user }) => {
+const Header = ({ user, onUserUpdate }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await fetch('/api/user_logout', { method: 'POST' });
+    onUserUpdate(null);
     navigate('/');
     window.location.reload();
   };

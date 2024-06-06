@@ -24,14 +24,18 @@ const App = () => {
       .catch(() => setUser(null));
   }, []);
 
+  const handleUserUpdate = (user) => {
+    setUser(user);
+  };
+
   return (
     <Router>
-      <Header />
+      <Header user={user} onUserUpdate={handleUserUpdate} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/api/insert_movie" element={<InsertMovie />} />
-          <Route path="/api/user_login" element={<SignIn />} />
-          <Route path="/api/user_signup" element={<SignUp />} />
+          <Route path="/api/user_login" element={<SignIn onUserUpdate={handleUserUpdate}/>} />
+          <Route path="/api/user_signup" element={<SignUp onUserUpdate={handleUserUpdate}/>} />
           <Route path="/api/admin_dashboard" element={<AdminDashboard />} />
           <Route path="/api/profile" element={<Profile />} />
           <Route path="/api/add_movie" element={<AddMovie />} />

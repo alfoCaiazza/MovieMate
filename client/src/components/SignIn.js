@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
-const SignIn = () => {
+const SignIn = ({ onUserUpdate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,8 +20,9 @@ const SignIn = () => {
 
       if (response.ok) {
         setError('');
-         // Check if the email and password match the specific criteria
-         if (email === 'admin@moviemate.com' && password === 'admin') {
+        onUserUpdate(data.user); // Update the user state in App
+        // Check if the email and password match the specific criteria
+        if (email === 'admin@moviemate.com' && password === 'admin') {
           navigate('/api/admin_dashboard');
         } else {
           navigate('/');

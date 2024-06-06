@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
-const SignUp = () => {
+const SignUp = ({ onUserUpdate }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,6 +44,7 @@ const SignUp = () => {
       if (response.ok) {
         setMessage('Registration successful!');
         setError('');
+        onUserUpdate(data.user); // Update the user state in App
         navigate('/');
       } else {
         setError(data.error);
