@@ -17,6 +17,7 @@ from backend.get_movies import get_movies
 from backend.get_users import get_users
 from backend.search import search
 from backend.handle_movie import add_rating, add_to_favorites, handle_movie, user_favorites
+from backend.get_favorites import get_user_favorites
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
@@ -51,8 +52,7 @@ handle_movie(app, db)
 add_to_favorites(app, db)
 add_rating(app, db)
 user_favorites(app, db)
+get_user_favorites(app, db)
 
 if __name__ == '__main__':
-    with app.test_request_context():
-        print(app.url_map)
     app.run(debug=True)

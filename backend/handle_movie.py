@@ -36,14 +36,12 @@ def add_to_favorites(app, db):
 
             user = db.user.find_one({"_id": user_id})
 
-            print(user)
-
             if not user:
                 return jsonify({'error': 'User not found'}), 404
 
             db.user.update_one(
                 {"_id": ObjectId(user_id)},
-                {"$addToSet": {"Favorites": ObjectId(movie_id)}},
+                {"$addToSet": {"Favorites": str(movie_id)}},
                 upsert = True
             )
 
@@ -88,10 +86,7 @@ def user_favorites(app, db):
                 return jsonify({'error': 'User not found'}), 404
             
             favorites = user.get('Favorites', [])
-
             favorites = [str(favorite) for favorite in user.get('Favorites', [])]
-
-            print(favorites)
 
             return jsonify({'favorites': favorites}), 200
         except Exception as e:
