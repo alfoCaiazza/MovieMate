@@ -13,14 +13,6 @@ const AdminDashboard = () => {
     navigate('/api/get_movies');
   }
 
-  const handleManageUserClick = async => {
-    navigate('/api/get_users');
-  }
-
-  const handleViewInsightClick = async => {
-    navigate('/api/');
-  }
-
   return (
     <div className="admin-dashboard">
       <main className="main-content">
@@ -34,16 +26,6 @@ const AdminDashboard = () => {
             <h3>Manage Movies</h3>
             <p>Update movies infos</p>
             <button onClick={handleManageMovieClick}>Menage Movies</button>
-          </div>
-          <div className="dashboard-item">
-            <h3>Manage Users</h3>
-            <p>View and manage registered users.</p>
-            <button onClick={handleManageUserClick}>Manage Users</button>
-          </div>
-          <div className="dashboard-item">
-            <h3>View Insights</h3>
-            <p>Analyze data and view insights.</p>
-            <button onClick={handleViewInsightClick}>View Insights</button>
           </div>
         </div>
       </main>
