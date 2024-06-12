@@ -7,7 +7,7 @@ def get_featured(app, db):
     @app.route('/api/featured', methods=['GET'])
     def inner_get_featured():
         try:
-            featured = db.movie.find().limit(5)
+            featured = db.movie.aggregate([{'$sample': {'size': 5}}])
             items = [item for item in featured]
             for item in items:
                 item['_id'] = str(item['_id'])  # Convert ObjectId to string

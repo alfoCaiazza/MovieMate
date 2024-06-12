@@ -44,7 +44,7 @@ body {
 }
 
 /* Stili per elementi featured e trailer */
-.featured-item, .trailer-item {
+.featured-item {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -52,6 +52,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  height: 400px;
 }
 
 .featured-item:hover, .trailer-item:hover {
@@ -98,3 +99,7 @@ body {
   margin-top: 10px;
 }
 
+.link-item {
+  text-decoration: none;
+  color: black;
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
 
@@ -43,15 +44,17 @@ const HomePage = () => {
           <h2>Featured Today</h2>
           <div className="featured-content">
             {featuredItems.map(item => (
-              <div key={item._id} className="featured-item">
-                <div className="featured-image-wrapper">
-                  <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
+              <Link key={item._id} to={`/api/handle_movie/${item._id}`} className="link-item">
+                <div key={item._id} className="featured-item">
+                  <div className="featured-image-wrapper">
+                    <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
+                  </div>
+                  <div className="featured-details">
+                    <h3 className="featured-title">{item.Series_Title}</h3>
+                    <p className="featured-overview">{item.Overview}</p>
+                  </div>
                 </div>
-                <div className="featured-details">
-                  <h3 className="featured-title">{item.Series_Title}</h3>
-                  <p className="featured-overview">{item.Overview}</p>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -60,11 +63,13 @@ const HomePage = () => {
           <h2>Latest Trailers</h2>
           <div className="trailers-content">
             {trailerItems.map(item => (
-              <div key={item._id} className="trailer-item">
-                <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
-                <h3>{item.Series_Title}</h3>
-                <p>{item.Overview}</p>
-              </div>
+              <Link key={item._id} to={`/api/handle_movie/${item._id}`} className="link-item">
+                <div key={item._id} className="featured-item">
+                  <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
+                  <h3>{item.Series_Title}</h3>
+                  <p>{item.Overview}</p>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -73,7 +78,7 @@ const HomePage = () => {
           <h2>Selected For You</h2>
           <div className="trailers-content">
             {trailerItems.map(item => (
-              <div key={item._id} className="trailer-item">
+              <div key={item._id} className="featured-item">
                 <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
                 <h3>{item.Series_Title}</h3>
                 <p>{item.Overview}</p>
