@@ -6,6 +6,7 @@ const MovieDetail = ({ user }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [rating, setRating] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -22,7 +23,30 @@ const MovieDetail = ({ user }) => {
     };
 
     fetchMovie();
-  }, [id]);
+  }, [id]);  
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      if (user) {
+        try {
+          const response = await fetch(`/api/user_favorites/${user._id}`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch user favorites');
+          }
+          const favorites = await response.json();
+
+          const isFavorite = favorites.favorites.includes(id.toString())
+
+          setIsFavorite(isFavorite);
+        } catch (error) {
+          console.error('Error fetching user favorites:', error);
+        }
+      }
+    };
+  
+    fetchFavorites();
+  }, [user, id]);
+  
 
   const handleAddToFavorites = async () => {
     if (!user) {
@@ -30,8 +54,10 @@ const MovieDetail = ({ user }) => {
       return;
     }
 
+    console.log('Adding to favorites for user:', user, 'and movie:', id);
+
     try {
-      const response = await fetch('/api/add_to_favorites', {
+      const response = await fetch('http://localhost:5000/api/add_to_favorites', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,6 +67,9 @@ const MovieDetail = ({ user }) => {
 
       if (!response.ok) {
         throw new Error('Failed to add to favorites');
+      } else {
+        setIsFavorite(true);
+        // Optionally, you can update the user's favorites state here
       }
 
       alert('Movie added to favorites');
@@ -55,6 +84,8 @@ const MovieDetail = ({ user }) => {
       alert('You must be logged in to rate this movie.');
       return;
     }
+
+    console.log('Rating change for user:', user, 'and movie:', id, 'with rating:', event.target.value);
 
     setRating(event.target.value);
 
@@ -90,9 +121,15 @@ const MovieDetail = ({ user }) => {
         <p className="movie-overview">{movie.Overview}</p>
         {user && (
           <div className="user-actions">
-            <button onClick={handleAddToFavorites} className="favorites-button">
-              <i className="bi bi-heart"></i> Add to Favorites
-            </button>
+            {isFavorite ? (
+              <button className="favorites-button favorite">
+                <i className="bi bi-heart-fill"></i> Already in Favorites
+              </button>
+            ) : (
+              <button onClick={handleAddToFavorites} className="favorites-button">
+                <i className="bi bi-heart"></i> Add to Favorites
+              </button>
+            )}
             <div className="rating-section">
               <label>
                 Rate this movie:
