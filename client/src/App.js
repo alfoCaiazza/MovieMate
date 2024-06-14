@@ -32,7 +32,7 @@ const App = () => {
     <Router>
       <Header user={user} onUserUpdate={handleUserUpdate} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage/>} />
           <Route path="/api/insert_movie" element={<InsertMovie />} />
           <Route path="/api/user_login" element={<SignIn onUserUpdate={handleUserUpdate}/>} />
           <Route path="/api/user_signup" element={<SignUp onUserUpdate={handleUserUpdate}/>} />

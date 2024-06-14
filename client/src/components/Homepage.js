@@ -4,8 +4,17 @@ import axios from 'axios';
 import './HomePage.css';
 
 const HomePage = () => {
+  const[user, setUser] = useState(null);
   const [featuredItems, setFeaturedItems] = useState([]);
   const [trailerItems, setTrailerItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/get_current_user')
+      .then(response => response.json())
+      .then(data => setUser(data.user))
+      .catch(() => setUser(null));
+  }, []);
 
   useEffect(() => {
     const fetchFeaturedItems = async () => {
@@ -26,9 +35,22 @@ const HomePage = () => {
       }
     };
 
+    const fetchSelectedItems = async () => {
+      try{
+        const response = await axios.get(`/api/selected_for_you/${user._id}`);
+        setSelectedItems(response.data.recomanded_movies);
+      } catch (error){
+        console.error('Error fetchin seleted-for-you items:', error);
+      }
+    }
+ 
     fetchFeaturedItems();
     fetchTrailerItems();
-  }, []);
+
+    if(user){
+      fetchSelectedItems();
+    }
+  }, [user]);
 
   return (
     <div className="homepage">
@@ -39,7 +61,20 @@ const HomePage = () => {
             <p>Your guide to movies, TV shows, and more.</p>
           </div>
         </section>
-
+        {user && (
+          <section className="trailers">
+            <h2>Selected For You</h2>
+            <div className="trailers-content">
+              {selectedItems && selectedItems.map(item => (
+                <div key={item._id} className="featured-item">
+                  <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
+                  <h3>{item.Series_Title}</h3>
+                  <p>{item.Overview}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
         <section className="featured">
           <h2>Featured Today</h2>
           <div className="featured-content">
@@ -70,19 +105,6 @@ const HomePage = () => {
                   <p>{item.Overview}</p>
                 </div>
               </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="trailers">
-          <h2>Selected For You</h2>
-          <div className="trailers-content">
-            {trailerItems.map(item => (
-              <div key={item._id} className="featured-item">
-                <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
-                <h3>{item.Series_Title}</h3>
-                <p>{item.Overview}</p>
-              </div>
             ))}
           </div>
         </section>

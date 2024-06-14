@@ -14,7 +14,7 @@ def user_login(app, db):
             if not email or not password:
                 return jsonify({'error': 'Email and password are required'}), 400
             
-            user = db["user"].find_one({"email": email, "password": password})
+            user = db["user"].find_one({"Email": email, "Password": password})
 
             if not user:
                 return jsonify({'error': 'Invalid email or password'}), 401
