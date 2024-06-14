@@ -40,7 +40,7 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      <h1>Hi, {user.name}!</h1>
+      <h1>Hi, {user.Name}!</h1>
       <div>
         <p>There's your favorite movies</p>
         {favoriteMovies.map(item => (
