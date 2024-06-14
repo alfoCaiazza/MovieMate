@@ -12,16 +12,8 @@ def get_recommended_movies(app, db):
                 return jsonify({'error': 'User not found'}), 404
             
             genres, favorite_movies = get_user_preferences(db, user)
-
-            print(genres, len(favorite_movies))
-
             favorite_genres = analyze_favorites(favorite_movies)
-
-            print(favorite_genres)
-
             recomandation = recommend_movies(db, genres, favorite_genres, favorite_movies)
-
-            print(len(recomandation))
 
             return jsonify({'recomanded_movies': recomandation}), 200
         except Exception as e:

@@ -66,11 +66,13 @@ const HomePage = () => {
             <h2>Selected For You</h2>
             <div className="trailers-content">
               {selectedItems && selectedItems.map(item => (
-                <div key={item._id} className="featured-item">
-                  <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
-                  <h3>{item.Series_Title}</h3>
-                  <p>{item.Overview}</p>
-                </div>
+                <Link key={item._id} to={`/api/handle_movie/${item._id}`} className="link-item">
+                  <div key={item._id} className="featured-item">
+                    <img src={item.Poster_Link} alt={item.Series_Title} className="featured-image" />
+                    <h3>{item.Series_Title}</h3>
+                    <p>{item.Overview}</p>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
