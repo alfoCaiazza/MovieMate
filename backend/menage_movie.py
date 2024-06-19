@@ -19,3 +19,32 @@ def manage_movie(app, db):
 
         except Exception as e:
             return jsonify({'error': str(e)}), 500
+        
+
+def update_movie(app, db):
+    @app.route('/api/update_movie/<movie_id>', methods=['PUT'])
+    def update_movie_route(movie_id):
+        try:
+            obj_id = ObjectId(movie_id)
+        except Exception as e:
+            return jsonify({'error': 'Formato movie_id non valido'}), 400
+        
+        if not request.is_json:
+            return jsonify({'error': 'La richiesta deve essere in formato JSON'}), 400
+        
+        updated_movie_data = request.json
+
+        if '_id' in updated_movie_data:
+            del updated_movie_data['_id']
+            
+        print(updated_movie_data)
+        
+        try:
+            result = db.movie.update_one({'_id': obj_id}, {'$set': updated_movie_data})
+            
+            if result.matched_count == 0:
+                return jsonify({'error': 'Nessun film trovato corrispondente a questo ID'}), 404
+            
+            return jsonify({'message': 'Film aggiornato correttamente'}), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
