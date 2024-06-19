@@ -23,6 +23,17 @@ const SignUp = ({ onUserUpdate }) => {
     }
   };
 
+  const capitalizeKeys = (obj) => {
+    const capitalizedObj = {};
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+        capitalizedObj[capitalizedKey] = obj[key];
+      }
+    }
+    return capitalizedObj;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,12 +41,14 @@ const SignUp = ({ onUserUpdate }) => {
       name,
       email,
       password,
-      age,
+      age : parseInt(age),
       genres
     };
 
+    const capitalizedUser = capitalizeKeys(user);
+
     try {
-      const response = await fetch(`/api/user_signup?user=${encodeURIComponent(JSON.stringify(user))}`, {
+      const response = await fetch(`/api/user_signup?user=${encodeURIComponent(JSON.stringify(capitalizedUser))}`, {
         method: 'GET'
       });
 
