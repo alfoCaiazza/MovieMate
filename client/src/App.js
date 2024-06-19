@@ -13,6 +13,7 @@ import GetMovies from './components/GetMovies';
 import GetUsers from './components/GetUsers';
 import SearchResult from './components/SearchResult';
 import MovieDetail from './components/MovieDetail';
+import EditMovieForm from './components/EditMovieForm';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/api/get_users" element={<GetUsers />} />
           <Route path="/api/search" element={ <SearchResult />} />
           <Route path= "/api/handle_movie/:id" element={ <MovieDetail user={user}/>} />
+          <Route path= "/api/manage_movie/:movie_id" element={ <EditMovieForm />} />
         </Routes>
       <Footer />
     </Router>

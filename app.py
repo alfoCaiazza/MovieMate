@@ -19,7 +19,7 @@ from backend.search import search
 from backend.handle_movie import add_rating, add_to_favorites, handle_movie, user_favorites
 from backend.get_favorites import get_user_favorites
 from backend.get_selected_for_you_items import get_recommended_movies
-
+from backend.menage_movie import manage_movie
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -55,6 +55,7 @@ add_rating(app, db)
 user_favorites(app, db)
 get_user_favorites(app, db)
 get_recommended_movies(app, db)
+manage_movie(app, db)
 
 if __name__ == '__main__':
     app.run(debug=True)

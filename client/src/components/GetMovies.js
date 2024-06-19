@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import {useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTable, usePagination } from 'react-table';
 import './GetMovies.css'; // Assuming you have a CSS file for styling
 
 const GetMovies = () => {
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('/api/get_movies')
@@ -75,7 +77,7 @@ const GetMovies = () => {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        page, // Instead of using 'rows', we'll use page,
+        page,
         nextPage,
         previousPage,
         canNextPage,
@@ -89,10 +91,16 @@ const GetMovies = () => {
         {
             columns,
             data,
-            initialState: { pageIndex: 0 }, // Pass our default table state
+            initialState: { pageIndex: 0 },
         },
         usePagination
     );
+
+    const handleRowClick = (row) => {
+        const movie_id = row.original._id.toString();
+        console.log(movie_id);
+        navigate(`/api/manage_movie/${movie_id}`);
+    };    
 
     return (
         <div>
@@ -110,7 +118,7 @@ const GetMovies = () => {
                     {page.map(row => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()}>
+                            <tr {...row.getRowProps()} onClick={() => handleRowClick(row)}>
                                 {row.cells.map(cell => (
                                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                 ))}
