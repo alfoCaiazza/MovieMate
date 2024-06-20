@@ -42,4 +42,17 @@
   .button:hover {
     background-color: #218838;
   }
+
+  input:required {
+    border-color: blue;
+  }
+  
+  input:required:invalid {
+    border-color: red;
+  }
+  
+  input:required:valid {
+    border-color: green;
+  }
+  
   

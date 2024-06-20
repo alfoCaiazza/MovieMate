@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './EditMovieForm.css';
 
 const EditMovieForm = () => {
     const { movie_id } = useParams(); // Recupera movie_id dalla URL
     const [movie, setMovie] = useState(null);
+    const navigate = useNavigate();
     const { register, handleSubmit, setValue } = useForm();
-    const [updateMessage, setUpdateMessage] = useState('');
+    const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Esegui la chiamata API per recuperare i dettagli del film
+        // Recupera i dettagli del film quando il componente viene caricato
         axios.get(`/api/manage_movie/${movie_id}`)
             .then(response => {
                 setMovie(response.data); // Imposta lo stato del film con i dati ricevuti
@@ -19,34 +21,52 @@ const EditMovieForm = () => {
                 Object.keys(response.data).forEach(key => {
                     setValue(key, response.data[key]);
                 });
+                setIsLoading(false); // Imposta lo stato di caricamento a falso
             })
             .catch(error => {
                 console.error('Error fetching movie:', error);
+                setIsLoading(false); // Imposta lo stato di caricamento a falso
             });
     }, [movie_id, setValue]);
 
-    const onSubmit = (data) => {
-        // Esegui la chiamata API per aggiornare il film con i dati del form
+    const handleUpdate = (data) => {
         axios.put(`/api/update_movie/${movie_id}`, data)
             .then(response => {
                 console.log('Movie updated successfully:', response.data);
-                setUpdateMessage('Movie updated successfully!');
+                setMessage('Movie updated successfully!');
+                setTimeout(() => {
+                    navigate('/api/get_movies');
+                }, 3000); // Ritarda la navigazione di 3 secondi
             })
             .catch(error => {
                 console.error('Error updating movie:', error);
-                setUpdateMessage('Error updating movie. Please try again.');
-
+                setMessage('Error updating movie. Please try again.');
             });
     };
 
-    if (!movie) {
+    const handleDelete = () => {
+        axios.delete(`/api/delete_movie/${movie_id}`)
+            .then(response => {
+                console.log('Movie deleted successfully:', response.data);
+                setMessage('Movie deleted successfully!');
+                setTimeout(() => {
+                    navigate('/api/get_movies');
+                }, 3000); // Ritarda la navigazione di 3 secondi
+            })
+            .catch(error => {
+                console.error('Error deleting movie:', error);
+                setMessage('Error deleting movie. Please try again.');
+            });
+    };
+
+    if (isLoading) {
         return <div>Loading...</div>; // Messaggio di caricamento durante il recupero dei dati del film
     }
 
     return (
         <div className="form-container">
             <h2>Edit Movie</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleUpdate)}>
                 <div className="form-group">
                     <label>Title:</label>
                     <input type="text" {...register('Series_Title')} defaultValue={movie.Series_Title} />
@@ -83,11 +103,12 @@ const EditMovieForm = () => {
                     
                     <label>Number of Votes:</label>
                     <input type="text" {...register('No_of_Votes')} defaultValue={movie.No_of_Votes} />
-                    
-                    <button type="submit">Update Movie</button>
                 </div>
+                <button type="submit">Update Movie</button>
+                {/* Usa button type="button" per evitare il submit del form */}
+                <button type="button" onClick={handleDelete}>Delete Movie</button>
             </form>
-            {updateMessage && <p className={updateMessage.includes('Error') ? 'error-message' : 'success-message'}>{updateMessage}</p>}
+            {message && <p className={message.includes('Error') ? 'error-message' : 'success-message'}>{message}</p>}
         </div>
     );
 };

@@ -48,3 +48,17 @@ def update_movie(app, db):
             return jsonify({'message': 'Film aggiornato correttamente'}), 200
         except Exception as e:
             return jsonify({'error': str(e)}), 500
+        
+def delete_movie(app, db):
+    @app.route('/api/delete_movie/<movie_id>', methods=['DELETE'])
+    def update_delete_movie(movie_id):
+        try:
+            obj_id = ObjectId(movie_id)
+            
+            result = db.movie.delete_one({'_id': obj_id})
+            if result.deleted_count == 1:
+                return jsonify({'message': 'Film cancellato correttamente'}), 200
+            else:
+                return jsonify({'error': 'Errore durante la cancellazione del film'}), 500
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500

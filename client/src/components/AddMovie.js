@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddMovie.css';
 
@@ -38,9 +38,9 @@ const AddMovie = () => {
     e.preventDefault();
 
     try {
-        const response = await fetch(`/api/add_movie?movie=${encodeURIComponent(JSON.stringify(formData))}`, {
-            method: 'GET'
-        });
+      const response = await fetch(`/api/add_movie?movie=${encodeURIComponent(JSON.stringify(formData))}`, {
+        method: 'GET'
+      });
 
       const data = await response.json();
 
@@ -58,14 +58,21 @@ const AddMovie = () => {
     }
   };
 
+  const formatLabel = (key) => {
+    return key
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, char => char.toUpperCase());
+  };
+
   return (
     <form onSubmit={handleSubmit} className="form">
       {Object.keys(formData).map((key) => (
         <div key={key} className="form-group">
           <label className="label">
-            {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}:
+            {formatLabel(key)}:
           </label>
           <input
+            required
             type={key === 'Released_Year' || key === 'IMDB_Rating' || key === 'Meta_Score' || key === 'No_of_Votes' ? 'number' : 'text'}
             name={key}
             value={formData[key]}
