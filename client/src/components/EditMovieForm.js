@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import Modal from './Modal'; // Assicurati che il percorso del file Modal sia corretto
 import './EditMovieForm.css';
 
 const EditMovieForm = () => {
@@ -10,6 +11,7 @@ const EditMovieForm = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, setValue } = useForm();
     const [message, setMessage] = useState('');
+    const [showModal, setShowModal] = useState(false); // Stato per gestire la visibilità della modale
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -34,7 +36,9 @@ const EditMovieForm = () => {
             .then(response => {
                 console.log('Movie updated successfully:', response.data);
                 setMessage('Movie updated successfully!');
+                setShowModal(true); // Mostra la modale
                 setTimeout(() => {
+                    setShowModal(false);
                     navigate('/api/get_movies');
                 }, 3000); // Ritarda la navigazione di 3 secondi
             })
@@ -49,7 +53,9 @@ const EditMovieForm = () => {
             .then(response => {
                 console.log('Movie deleted successfully:', response.data);
                 setMessage('Movie deleted successfully!');
+                setShowModal(true); // Mostra la modale
                 setTimeout(() => {
+                    setShowModal(false);
                     navigate('/api/get_movies');
                 }, 3000); // Ritarda la navigazione di 3 secondi
             })
@@ -108,7 +114,7 @@ const EditMovieForm = () => {
                 {/* Usa button type="button" per evitare il submit del form */}
                 <button type="button" onClick={handleDelete}>Delete Movie</button>
             </form>
-            {message && <p className={message.includes('Error') ? 'error-message' : 'success-message'}>{message}</p>}
+            {message && <Modal show={showModal} message={message} onClose={() => setShowModal(false)} />}
         </div>
     );
 };
