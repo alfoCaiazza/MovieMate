@@ -78,7 +78,7 @@ const HomePage = () => {
           </section>
         )}
         <section className="featured">
-          <h2>Featured Today</h2>
+          <h2>Random Selection</h2>
           <div className="featured-content">
             {featuredItems.map(item => (
               <Link key={item._id} to={`/api/handle_movie/${item._id}`} className="link-item">

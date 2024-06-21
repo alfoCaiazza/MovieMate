@@ -112,6 +112,36 @@ const MovieDetail = ({ user }) => {
     return <div>Loading...</div>;
   }
 
+  const handleRemoveFromFavorites = async () => {
+    if (!user) {
+      alert('You must be logged in to remove from favorites.');
+      return;
+    }
+  
+    console.log('Removing from favorites for user:', user, 'and movie:', id);
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/remove_from_favorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: user._id, movie_id: id }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to remove from favorites');
+      } else {
+        setIsFavorite(false);
+      }
+  
+      alert('Movie removed from favorites');
+    } catch (error) {
+      console.error('Error removing from favorites:', error);
+      alert('An error occurred while removing from favorites');
+    }
+  };
+
   return (
     <div className="movie-detail">
       <img src={movie.Poster_Link} alt={movie.Series_Title} className="movie-poster" />
@@ -120,12 +150,13 @@ const MovieDetail = ({ user }) => {
         <p className="movie-overiew">{movie.Released_Year} - {movie.Runtime}</p>
         <p className="movie-overiew">Rating: {movie.IMDB_Rating}</p>
         <p className="movie-overview">{movie.Overview}</p>
-        <h2 className="movie-title">Starring:</h2><p className="movie-overview">{movie.Star1},{movie.Star2},{movie.Star3},{movie.Star4} </p>
+        <h2 className="movie-title">Starring:</h2>
+        <p className="movie-overview">{movie.Star1},{movie.Star2},{movie.Star3},{movie.Star4}</p>
         {user && (
           <div className="user-actions">
             {isFavorite ? (
-              <button className="favorites-button favorite">
-                <i className="bi bi-heart-fill"></i> Already in Favorites
+              <button onClick={handleRemoveFromFavorites} className="favorites-button favorite">
+                <i className="bi bi-heart-fill"></i> Remove from Favorites
               </button>
             ) : (
               <button onClick={handleAddToFavorites} className="favorites-button">
@@ -150,6 +181,7 @@ const MovieDetail = ({ user }) => {
       </div>
     </div>
   );
+  
 };
 
 export default MovieDetail;

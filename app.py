@@ -16,7 +16,7 @@ from backend.user_logout import user_logout
 from backend.get_movies import get_movies
 from backend.get_users import get_users
 from backend.search import search
-from backend.handle_movie import add_rating, add_to_favorites, handle_movie, user_favorites
+from backend.handle_movie import add_rating, add_to_favorites, handle_movie, user_favorites, remove_from_favorites
 from backend.get_favorites import get_user_favorites
 from backend.get_selected_for_you_items import get_recommended_movies
 from backend.menage_movie import manage_movie, update_movie, delete_movie
@@ -58,6 +58,7 @@ get_recommended_movies(app, db)
 manage_movie(app, db)
 update_movie(app, db)
 delete_movie(app, db)
+remove_from_favorites(app, db)
 
 if __name__ == '__main__':
     app.run(debug=True)

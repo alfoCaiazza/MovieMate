@@ -91,4 +91,33 @@ def user_favorites(app, db):
             return jsonify({'favorites': favorites}), 200
         except Exception as e:
             return jsonify({'error': str(e)}), 500
+        
+
+def remove_from_favorites(app, db):
+    @app.route('/api/remove_from_favorites', methods=['POST'])
+    def inner_remove_from_favorites():
+        try:
+            user_id = request.json.get('user_id')
+            movie_id = request.json.get('movie_id')
+
+            if not user_id or not movie_id:
+                return jsonify({'error': 'user_id and movie_id are required'}), 400
+            
+            user_id = ObjectId(user_id)
+            movie_id = str(ObjectId(movie_id))
+
+            user = db.user.find_one({"_id": user_id})
+
+            if not user:
+                return jsonify({'error': 'User not found'}), 404
+
+            db.user.update_one(
+                {"_id": user_id},
+                {"$pull": {"Favorites": movie_id}}
+            )
+
+            return jsonify({'message': 'Movie removed from favorites'}), 200
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
