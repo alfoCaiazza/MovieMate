@@ -31,19 +31,16 @@ body {
     font-size: 24px;
   }
   
-/* Stili generali per la sezione featured */
 .featured, .trailers {
   margin: 20px 0;
 }
 
-/* Layout per contenuti featured e trailers */
 .featured-content, .trailers-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  /* Dimensione minima moderata per gli elementi */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
   gap: 20px;
 }
 
-/* Stili per elementi featured e trailer */
 .featured-item {
   display: flex;
   flex-direction: column;
@@ -60,7 +57,6 @@ body {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Wrapper per l'immagine featured */
 .featured-image-wrapper {
   width: 100%;
   overflow: hidden;
@@ -68,7 +64,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* Immagine featured */
 .featured-image {
   width: 100%;
   height: auto;
@@ -80,19 +75,16 @@ body {
   transform: scale(1.05);
 }
 
-/* Stili per i dettagli featured */
 .featured-details {
   text-align: left;
 }
 
-/* Titolo featured */
 .featured-title {
   font-size: 1.25rem;
   margin: 0;
   color: #333;
 }
 
-/* Overview featured */
 .featured-overview {
   font-size: 1rem;
   color: #666;

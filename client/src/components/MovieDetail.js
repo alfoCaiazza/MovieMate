@@ -147,7 +147,7 @@ const MovieDetail = ({ user }) => {
       <img src={movie.Poster_Link} alt={movie.Series_Title} className="movie-poster" />
       <div className="movie-info">
         <h2 className="movie-title">{movie.Series_Title}</h2>
-        <p className="movie-overiew">{movie.Released_Year} - {movie.Runtime}</p>
+        <p className="movie-overiew">{movie.Released_Year} - {movie.Runtime} - {movie.Genre}</p>
         <p className="movie-overiew">Rating: {movie.IMDB_Rating}</p>
         <p className="movie-overview">{movie.Overview}</p>
         <h2 className="movie-title">Starring:</h2>

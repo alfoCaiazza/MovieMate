@@ -17,7 +17,7 @@ def get_recommended_movies(app, db):
 
             return jsonify({'recomanded_movies': recomandation}), 200
         except Exception as e:
-            print("Error:", e)  # Stampa il messaggio di errore per debug
+            print("Error:", e) 
             return jsonify({'error': str(e)}), 500
 
 def get_user_preferences(db, user):
@@ -41,29 +41,53 @@ def analyze_favorites(favorite_movies):
 
     return favorite_genres
 
-def recommend_movies(db, user_genres, favorite_genres, favorite_movies):
-    #Combining user fav generes and fav movies genres
-    combined_genres = list(set(user_genres) | favorite_genres)
+from bson import ObjectId
 
-    #Find matching movies
-    recommended_movies = db.movie.find({
-        "Genre" : {"$in": combined_genres},
-        "_id": {"$nin": [ObjectId(movie['_id']) for movie in favorite_movies]}
-    }).limit(5)
+def recommend_movies(db, user_genres, favorite_genres, favorite_movies):
+    combined_genres = list(set(user_genres) | set(favorite_genres))
+
+    # Find movies whom genre is in the list of user genres but not in the favorites
+    recommended_movies_cursor = db.movie.aggregate([
+        #Get movie genres
+        {
+            "$addFields": {
+                "GenreArray": {
+                    "$split": ["$Genre", ", "]
+                }
+            }
+        },
+        #Filtering movies by genre
+        {
+            "$match": {
+                "GenreArray": {
+                    "$in": combined_genres
+                },
+                "_id": {
+                    "$nin": [ObjectId(movie['_id']) for movie in favorite_movies]
+                }
+            }
+        },
+        #Set movies limit to 5
+        {
+            "$limit": 5
+        }
+    ])
 
     recommendations = []
-    for movie in recommended_movies:
-        score = len(set(movie['Genre']) & set(combined_genres))
+    for movie in recommended_movies_cursor:
+        # Step 4: Calcola il punteggio in base ai generi corrispondenti
+        movie_genres = set(movie['GenreArray'])
+        score = len(movie_genres & set(combined_genres))
+        
         recommendations.append((score, {
-            'Poster_Link': movie['Poster_Link'],
-            'Series_Title': movie['Series_Title'],
-            'Genre': movie['Genre'],
-            'Overview': movie['Overview'],
+            'Poster_Link': movie.get('Poster_Link'),
+            'Series_Title': movie.get('Series_Title'),
+            'Genre': movie.get('Genre'),
+            'Overview': movie.get('Overview'),
             '_id': str(movie['_id'])
         }))
+
     recommendations.sort(reverse=True, key=lambda x: x[0])
 
     return [movie for score, movie in recommendations]
-
-
 
