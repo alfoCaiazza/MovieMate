@@ -69,7 +69,6 @@ const MovieDetail = ({ user }) => {
         throw new Error('Failed to add to favorites');
       } else {
         setIsFavorite(true);
-        // Optionally, you can update the user's favorites state here
       }
 
       alert('Movie added to favorites');
@@ -118,7 +117,10 @@ const MovieDetail = ({ user }) => {
       <img src={movie.Poster_Link} alt={movie.Series_Title} className="movie-poster" />
       <div className="movie-info">
         <h2 className="movie-title">{movie.Series_Title}</h2>
+        <p className="movie-overiew">{movie.Released_Year} - {movie.Runtime}</p>
+        <p className="movie-overiew">Rating: {movie.IMDB_Rating}</p>
         <p className="movie-overview">{movie.Overview}</p>
+        <h2 className="movie-title">Starring:</h2><p className="movie-overview">{movie.Star1},{movie.Star2},{movie.Star3},{movie.Star4} </p>
         {user && (
           <div className="user-actions">
             {isFavorite ? (
